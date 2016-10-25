@@ -16,8 +16,14 @@ ingredients = {
     "fruity": ["slice of orange", "dash of cassis", "cherry on top"],
 }
 
+nameChoices = {
+    "adjectives": ["Shiny", "Golden", "Adventurous", "Evil"], 
+    "nouns": ["Monkey", "Eyepatch", "Wooden Leg", "Jolly Roger", "Seadog"],
+}
+
 preferences = {}
 drink = []
+drinkName = []
 
 def askQuestions(questions):
     """Ask each question and record the appropriate response in the preferences dictionary"""
@@ -41,15 +47,22 @@ def makeDrink(preferences):
             #print(addedIngredient)
             drink.append(addedIngredient)
             
+def nameDrink(nameChoices): 
+    for key in nameChoices: 
+        drinkName.append(random.choice(nameChoices[key]))
+    
+            
 if __name__ == '__main__':
     askQuestions(questions)            
                 
     makeDrink(preferences)        
     
+    nameDrink(nameChoices)
+    
     drinkContents = ', '.join(drink)
     
     if (len(drink)>0):
-        print("Your drink includes: {}".format(drinkContents))
+        print("I've made you a {0}. It contains: {1}".format(' '.join(drinkName), drinkContents))
     else: 
         print("Sorry, we don't have any ingredients you like.")
     
