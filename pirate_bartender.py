@@ -22,8 +22,7 @@ nameChoices = {
 }
 
 preferences = {}
-drink = []
-drinkName = []
+keepDrinking = True
 
 def askQuestions(questions):
     """Ask each question and record the appropriate response in the preferences dictionary"""
@@ -41,28 +40,38 @@ def askQuestions(questions):
 
 def makeDrink(preferences):
     for taste in preferences: 
-       # print(preferences[taste])
         if (preferences[taste]) == True: 
             addedIngredient = random.choice(ingredients[taste])
-            #print(addedIngredient)
             drink.append(addedIngredient)
             
 def nameDrink(nameChoices): 
     for key in nameChoices: 
         drinkName.append(random.choice(nameChoices[key]))
-    
-            
-if __name__ == '__main__':
-    askQuestions(questions)            
-                
-    makeDrink(preferences)        
-    
-    nameDrink(nameChoices)
-    
     drinkContents = ', '.join(drink)
-    
     if (len(drink)>0):
         print("I've made you a {0}. It contains: {1}".format(' '.join(drinkName), drinkContents))
     else: 
-        print("Sorry, we don't have any ingredients you like.")
+        print("Sorry, we don't have any ingredients you like.")    
+        
+def offerDrink(): 
+        global keepDrinking 
+        anotherDrink = input("Would you like another drink?\n")
+        if (anotherDrink.lower() == 'yes' or anotherDrink.lower() == 'y'):
+            keepDrinking = True
+        elif (anotherDrink.lower() == 'no' or anotherDrink.lower() == 'n'):
+            keepDrinking = False
+            
+if __name__ == '__main__':
+    askQuestions(questions)        
+    
+    while keepDrinking == True:  
+        drink = []
+        drinkName = []
+        anotherDrink = ''
+        
+        makeDrink(preferences)        
+        
+        nameDrink(nameChoices)
+            
+        offerDrink()    
     
